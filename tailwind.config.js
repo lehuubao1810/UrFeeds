@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      translate: {
+        "feed": "-20rem",
+      },
+    },
   },
   plugins: [],
 }
