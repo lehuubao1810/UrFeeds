@@ -5,7 +5,7 @@ type Props = {
     // Define your props here
 };
 
-const SideBarFeed: React.FC<Props> = (props) => {
+const LoadingScreen: React.FC<Props> = (props) => {
     // Component logic goes here
     console.log(props);
     return (
@@ -15,4 +15,4 @@ const SideBarFeed: React.FC<Props> = (props) => {
     );
 };
 
-export default SideBarFeed;
+export default LoadingScreen;

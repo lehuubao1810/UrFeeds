@@ -1,9 +1,15 @@
 
+import { Outlet } from "react-router-dom";
+import SideBarNavigation from "../components/SideBarNavigation";
+
 
 export default function HomePage() {
+
+
     return (
-        <div>
-            <h1>Home Page</h1>
+        <div className="flex-initial">
+            <SideBarNavigation/>
+            <Outlet />
         </div>
     );
 }
