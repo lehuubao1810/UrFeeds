@@ -32,16 +32,16 @@ const FeedContent: React.FC<Props> = (props) => {
   const [isSelectedPostUrl, setIsSelectedPostUr] = useState("");
 
   const shareToFacebook = (url: string) => {
-    // console.log(window.FB);
-    window.FB.ui(
-      {
-        method: "share",
-        href: url,
-      },
-      function (response: string) {
-        console.log(response);
-      }
-    );
+    console.log("SHARE FB", url);
+    // window.FB.ui(
+    //   {
+    //     method: "share",
+    //     href: url,
+    //   },
+    //   function (response: string) {
+    //     console.log(response);
+    //   }
+    // );
   };
 
   const handleSave = async (link: string) => {
