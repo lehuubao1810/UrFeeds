@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 type PostState = {
     postID: string;
+    read: boolean;
 };
 
 const initialState: PostState = {
     postID: "",
+    read: false,
 };
 
 const postSlice = createSlice({
@@ -14,6 +16,7 @@ const postSlice = createSlice({
     reducers: {
         getFeedFromID(state, action: { payload: string }) {
             state.postID = action.payload;
+            state.read = true;
         },
     },
 });

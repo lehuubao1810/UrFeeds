@@ -15,11 +15,12 @@ import postReducer from "./post.slice";
 import feedsReducer from "./feeds.slice";
 import authReducer from "./auth.slice";
 import savePostReducer from "./savePost.slice";
+import feedReducer from "./feed.slice";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "feeds", "savePost"],
 };
 
 const rootReducer = combineReducers({
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   feeds: feedsReducer,
   auth: authReducer,
   savePost: savePostReducer,
+  feed: feedReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -47,6 +49,10 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+
+export const clearPersistedState = () => {
+  persistor.purge();
+};
 
 export type RootState = ReturnType<typeof store.getState>; // This is the type of the state in the store
 export type AppDispatch = typeof store.dispatch; // This is the type of the dispatch function

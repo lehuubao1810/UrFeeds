@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, loginWithGoogle, loginWithGithub } from "../redux/auth.slice";
+import {
+  loginUser,
+  loginWithGoogle,
+  loginWithGithub,
+} from "../redux/auth.slice";
 
 import { RootState } from "../redux/store";
 import { AppDispatch } from "../redux/store";
@@ -11,9 +15,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
+  const {status} = useSelector((state: RootState) => state.auth);
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -22,24 +24,26 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(loginUser({ email, password }));
-    if (isAuthenticated) {
+    if (status === "succeeded") {
       navigate("/");
     }
   };
 
   const handleGoogleLogin = async () => {
     await dispatch(loginWithGoogle());
-    if (isAuthenticated) {
+    if (status === "succeeded") {
+
       navigate("/");
     }
   };
 
   const handleGithubLogin = async () => {
     await dispatch(loginWithGithub());
-    if (isAuthenticated) {
+    if (status === "succeeded") {
       navigate("/");
     }
   };
+
 
   return (
     <div className="flex items-center justify-around h-screen container">
@@ -76,12 +80,18 @@ export default function LoginPage() {
         <div className="text-center mt-4 text-sm font-bold">or login with</div>
         <div className="flex justify-center mt-4">
           <div className="p-2 rounded-md mr-2">
-            <img src="./gg_icon.png" alt="google" onClick={handleGoogleLogin}
+            <img
+              src="./gg_icon.png"
+              alt="google"
+              onClick={handleGoogleLogin}
               className="cursor-pointer h-8 w-8 hover:opacity-90 hover:scale-105 transition duration-300 ease-in-out"
             />
           </div>
           <div className="p-2 rounded-md mr-2">
-            <img src="./github_icon.png" alt="github" onClick={handleGithubLogin}
+            <img
+              src="./github_icon.png"
+              alt="github"
+              onClick={handleGithubLogin}
               className="cursor-pointer h-8 w-8 hover:opacity-90 hover:scale-105 transition duration-300 ease-in-out"
             />
           </div>

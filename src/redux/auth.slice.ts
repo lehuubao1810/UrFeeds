@@ -20,7 +20,7 @@ type User = {
 type AuthState = {
   user: User;
   isAuthenticated: boolean;
-  status: "idle" | "loading" | "failed";
+  status: "idle" | "loading" | "failed" | "succeeded";
   error: string | null;
 };
 
@@ -63,6 +63,7 @@ export const loginUser = createAsyncThunk(
       email,
       password
     );
+    console.log(userCredential);
     // get user from firestore by uid
     const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
     const user = userDoc.data();
@@ -79,7 +80,7 @@ export const loginWithGoogle = createAsyncThunk(
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
-        console.log(token);
+        console.log("token", token);
         // The signed-in user info.
         const user = result.user;
         console.log(user);
@@ -157,6 +158,7 @@ const authSlice = createSlice({
       .addCase(registerUser.pending, (state) => {
         // state.user.isAuthenticated = false;
         state.status = "loading";
+        state.error = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
@@ -164,7 +166,7 @@ const authSlice = createSlice({
         state.user.username = action.payload.username ?? "";
         state.user.uid = action.payload.uid ?? "";
         console.log(action.payload);
-        state.status = "idle";
+        state.status = "succeeded";
       })
       .addCase(registerUser.rejected, (state) => {
         state.isAuthenticated = false;
@@ -176,13 +178,14 @@ const authSlice = createSlice({
     builder
       .addCase(loginUser.pending, (state) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.user.email = action.payload.email ?? "";
         state.user.username = action.payload.username ?? "";
         state.user.uid = action.payload.uid ?? "";
-        state.status = "idle";
+        state.status = "succeeded";
       })
       .addCase(loginUser.rejected, (state) => {
         state.isAuthenticated = false;
@@ -197,6 +200,7 @@ const authSlice = createSlice({
     builder
       .addCase(loginWithGoogle.pending, (state) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(loginWithGoogle.fulfilled, (state, action) => {
         console.log(action.payload);
@@ -209,7 +213,7 @@ const authSlice = createSlice({
           state.user.username = action.payload.displayName;
           state.user.uid = action.payload.uid;
           console.log("GG", action.payload);
-          state.status = "idle";
+          state.status = "succeeded";
         }
       })
       .addCase(loginWithGoogle.rejected, (state) => {
@@ -222,6 +226,7 @@ const authSlice = createSlice({
     builder
       .addCase(loginWithGithub.pending, (state) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(loginWithGithub.fulfilled, (state, action) => {
         console.log(action.payload);
@@ -234,7 +239,7 @@ const authSlice = createSlice({
           state.user.username = action.payload.displayName;
           state.user.uid = action.payload.uid;
           console.log("GG", action.payload);
-          state.status = "idle";
+          state.status = "succeeded";
         }
       })
       .addCase(loginWithGithub.rejected, (state) => {

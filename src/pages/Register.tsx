@@ -16,28 +16,28 @@ export default function LoginPage() {
   const dispatch: AppDispatch = useDispatch();
 
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
+  const {status} = useSelector(
+    (state: RootState) => state.auth
   );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registerUser({ email, username, password }));
-    if (isAuthenticated) {
+    if (status === "succeeded") {
       navigate("/");
     }
   };
 
   const handleGoogleLogin = async () => {
     await dispatch(loginWithGoogle());
-    if (isAuthenticated) {
+    if (status === "succeeded") {
       navigate("/");
     }
   };
 
   const handleGithubLogin = async () => {
     await dispatch(loginWithGithub());
-    if (isAuthenticated) {
+    if (status === "succeeded") {
       navigate("/");
     }
   };

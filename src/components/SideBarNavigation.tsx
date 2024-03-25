@@ -4,6 +4,11 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/auth.slice";
 import { Link } from "react-router-dom";
 
+import { AppDispatch } from "../redux/store";
+import { removeAllFeeds } from "../redux/feeds.slice";
+import { resetFeed } from "../redux/feed.slice";
+import { resetSavePost } from "../redux/savePost.slice";
+
 type Props = {
   // Define your props here
 };
@@ -11,9 +16,15 @@ type Props = {
 const SideBarNavigation: React.FC<Props> = (props) => {
   // Component logic goes here
   console.log(props);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    // Clear persisted data
+    dispatch(removeAllFeeds());
+    dispatch(resetFeed());
+    dispatch(resetSavePost());
+        
+    // Logout user
     dispatch(logoutUser());
   };
 
@@ -47,7 +58,7 @@ const SideBarNavigation: React.FC<Props> = (props) => {
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col justify-between">
           <ul className="space-y-2 font-medium">
             <li>
-              <Link 
+              <Link
                 to={"/"}
                 className="sm:flex-col flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -80,11 +91,11 @@ const SideBarNavigation: React.FC<Props> = (props) => {
                 {/* <span className="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">Pro</span> */}
               </Link>
             </li>
-            <li >
+            <li>
               <Link
                 title="Add feed"
                 to={"/add"}
-                className="sm:flex-col flex items-center p-2 text-gray-900 dark:text-white group hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                className="sm:flex-col flex items-center p-2 text-gray-900 dark:text-white group group"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,9 +105,13 @@ const SideBarNavigation: React.FC<Props> = (props) => {
                 >
                   <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z" />
                 </svg>
-                <p className="flex-1 whitespace-nowrap text-sm mx-4 sm:hidden block">Add feed</p>
+                <p className="flex-1 whitespace-nowrap text-sm mx-4 sm:hidden block">
+                  Add feed
+                </p>
               </Link>
-              <p className="flex-1 whitespace-nowrap text-sm hidden sm:block">Add feed</p>
+              <p className="flex-1 whitespace-nowrap text-sm hidden sm:block">
+                Add feed
+              </p>
             </li>
           </ul>
           <ul className="space-y-2 font-medium">
