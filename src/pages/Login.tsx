@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,6 +11,7 @@ import {
 import { RootState } from "../redux/store";
 import { AppDispatch } from "../redux/store";
 import LoadingScreen from "../components/LoadingScreen";
+// import { notify } from "../utils/toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -20,33 +21,41 @@ export default function LoginPage() {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(loginUser({ email, password }));
-    if (status === "succeeded") {
-      navigate("/");
-    }
+    // if (status === "succeeded") {
+    //   navigate("/");
+    // } else if (status === "failed") {
+    //   notify("Wrong email or password! Please try again.", "error");
+    //   console.log("error");
+    // }
   };
 
   const handleGoogleLogin = async () => {
     await dispatch(loginWithGoogle());
-    if (status === "succeeded") {
-      navigate("/");
-    }
+    // if (status === "succeeded") {
+    //   navigate("/");
+    // } else if (status === "failed") {
+    //   notify("Failed to login with Google", "error");
+    // }
   };
 
   const handleGithubLogin = async () => {
     await dispatch(loginWithGithub());
-    if (status === "succeeded") {
-      navigate("/");
-    }
+    // if (status === "succeeded") {
+    //   navigate("/");
+    // } else if (status === "failed") {
+    //   notify("Failed to login with Github", "error");
+    // }
   };
 
   return (
     <div className="flex items-center justify-around h-screen container">
       {status === "loading" && <LoadingScreen />}
+
       <div className="w-96 p-6 border border-gray-300 rounded-md shadow-md">
         <h1 className="text-2xl font-bold text-center mb-12 ">Login</h1>
         <form onSubmit={handleSubmit}>

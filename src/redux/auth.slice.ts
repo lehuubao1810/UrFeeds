@@ -10,6 +10,7 @@ import {
 
 import { auth, db, ggProvider, gitProvider } from "../../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { notify } from "../utils/toast";
 
 type User = {
   username: string;
@@ -172,6 +173,7 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.status = "failed";
         state.error = "Cannot register user! Please try again.";
+        notify("Failed to register user", "error");
       });
 
     // Login User
@@ -191,6 +193,7 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.status = "failed";
         state.error = "Invalid email or password! Please try again.";
+        notify("Invalid email or password", "error");
       });
     //   .addCase(PURGE, (state) => { // PURGE is an action dispatched by redux-persist to clear the store
     //     state.isAuthenticated = initialState.isAuthenticated;
@@ -220,6 +223,7 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.status = "failed";
         state.error = "Cannot login with Google! Please try again.";
+        notify("Failed to login with Google", "error");
       });
 
     // Login with Github
@@ -246,6 +250,7 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.status = "failed";
         state.error = "Cannot login with Github! Please try again.";
+        notify("Failed to login with Github", "error");
       });
   },
 });

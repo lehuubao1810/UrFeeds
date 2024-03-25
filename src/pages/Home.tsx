@@ -2,8 +2,7 @@ import { Outlet } from "react-router-dom";
 import SideBarNavigation from "../components/SideBarNavigation";
 import SideBarFeed from "../components/SideBarFeed";
 
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 
 export default function HomePage() {
@@ -13,7 +12,6 @@ export default function HomePage() {
     //     <Outlet />
     // </div>
     <div className="">
-      <ToastContainer />
       <SideBarNavigation />
       <SideBarFeed />
       <div className="p-4 sm:ml-80">

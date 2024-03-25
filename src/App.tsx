@@ -7,6 +7,8 @@ import {
 } from "react-router-dom";
 
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import NotFoundPage from "./pages/404";
 import LoginPage from "./pages/Login";
@@ -26,10 +28,11 @@ export default function App() {
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-  console.log(isAuthenticated);
-
+  
   return (
     <>
+      <ToastContainer />
+
       <Router>
         <Routes>
           <Route path="*" element={<NotFoundPage />} />,

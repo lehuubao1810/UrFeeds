@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,7 @@ import {
 import { AppDispatch } from "../redux/store";
 import { RootState } from "../redux/store";
 import LoadingScreen from "../components/LoadingScreen";
+import { notify } from "../utils/toast";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -20,29 +21,37 @@ export default function LoginPage() {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { status } = useSelector((state: RootState) => state.auth);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(registerUser({ email, username, password }));
-    if (status === "succeeded") {
-      navigate("/");
+    if (email.trim() === "" || password.trim() === "" || username.trim() === "" || confirmPassword.trim() === "") {
+      notify("Please fill in all fields", "error");
+      return;
     }
+    if (password !== confirmPassword) {
+      notify("Passwords do not match", "error");
+      return;
+    }
+    dispatch(registerUser({ email, username, password }));
+    // if (status === "succeeded") {
+    //   navigate("/");
+    // }
   };
 
   const handleGoogleLogin = async () => {
     await dispatch(loginWithGoogle());
-    if (status === "succeeded") {
-      navigate("/");
-    }
+    // if (status === "succeeded") {
+    //   navigate("/");
+    // }
   };
 
   const handleGithubLogin = async () => {
     await dispatch(loginWithGithub());
-    if (status === "succeeded") {
-      navigate("/");
-    }
+    // if (status === "succeeded") {
+    //   navigate("/");
+    // }
   };
 
   return (
