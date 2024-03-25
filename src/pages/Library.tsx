@@ -5,6 +5,7 @@ import { notify } from "../utils/toast";
 
 import { FeedCard } from "../components/FeedCard";
 import { Feed } from "../redux/feed.slice";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function Library() {
 
@@ -47,6 +48,9 @@ export default function Library() {
     <div 
        className="grid grid-cols-1 gap-4 sm:grid-cols-2"
     >
+      {
+        status === "loading" && <LoadingScreen />
+      }
       {feeds.map((feed) => (
         <FeedCard key={feed.link} feed={feed} handleFollow={handleFollow} handleUnFollow={handleUnFollow} />
       ))}

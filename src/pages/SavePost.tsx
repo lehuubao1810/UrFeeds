@@ -11,6 +11,7 @@ import {
   updateSavePostInFirestore,
   getSavePostFromFirestore,
 } from "../redux/savePost.slice";
+import LoadingScreen from "../components/LoadingScreen";
 
 // import FeedContent from "../components/FeedContent";
 
@@ -59,6 +60,7 @@ export default function SavePost() {
 
   return (
     <>
+       {savePost.status === "loading" && <LoadingScreen />}
       {savePost.posts.length !== 0 ? (
         <div className="flex justify-center">
           {isShareModalOpen && (
@@ -116,9 +118,6 @@ export default function SavePost() {
             />
           )}
           <div className="w-4/5">
-            {savePost.status === "loading" && <p>Loading...</p>}
-            {savePost.status === "failed" && <p>Failed to load feeds</p>}
-            {savePost.status === "succeeded" && (
               <ul>
                 {savePost.posts.map((post) => (
                   <li className="border-b-2 p-4 hover:bg-gray-50 cursor-pointer">
@@ -204,7 +203,6 @@ export default function SavePost() {
                   </li>
                 ))}
               </ul>
-            )}
           </div>
         </div>
       ) : (

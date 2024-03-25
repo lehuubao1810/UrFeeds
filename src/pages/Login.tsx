@@ -10,12 +10,13 @@ import {
 
 import { RootState } from "../redux/store";
 import { AppDispatch } from "../redux/store";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const {status} = useSelector((state: RootState) => state.auth);
+  const { status } = useSelector((state: RootState) => state.auth);
 
   const dispatch: AppDispatch = useDispatch();
 
@@ -32,7 +33,6 @@ export default function LoginPage() {
   const handleGoogleLogin = async () => {
     await dispatch(loginWithGoogle());
     if (status === "succeeded") {
-
       navigate("/");
     }
   };
@@ -44,9 +44,9 @@ export default function LoginPage() {
     }
   };
 
-
   return (
     <div className="flex items-center justify-around h-screen container">
+      {status === "loading" && <LoadingScreen />}
       <div className="w-96 p-6 border border-gray-300 rounded-md shadow-md">
         <h1 className="text-2xl font-bold text-center mb-12 ">Login</h1>
         <form onSubmit={handleSubmit}>

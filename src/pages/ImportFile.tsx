@@ -9,6 +9,7 @@ export default function ImportFile() {
   ) => {
     e.preventDefault();
     console.log("Importing file", file);
+    notify("Import file function is developing", "info");
   };
 
   return (

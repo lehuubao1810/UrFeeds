@@ -12,6 +12,7 @@ import {
   updateSavePostInFirestore,
   addPostToFirestore,
 } from "../redux/savePost.slice";
+import LoadingScreen from "./LoadingScreen";
 
 type Props = {
   // Define your props here
@@ -81,6 +82,7 @@ const FeedContent: React.FC<Props> = (props) => {
 
   return (
     <div className="flex justify-center">
+      {savePost.status === "loading" && <LoadingScreen />}
       {isShareModalOpen && (
         <Modal
           title="Share to"
