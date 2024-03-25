@@ -204,7 +204,7 @@ const authSlice = createSlice({
       })
       .addCase(loginWithGoogle.fulfilled, (state, action) => {
         console.log(action.payload);
-        if (action.payload === "auth/popup-closed-by-user") {
+        if (action.payload === "auth/popup-closed-by-user" || action.payload === "auth/unauthorized-domain") {
           state.error = action.payload.errorMessage;
           state.status = "failed";
         } else {
@@ -230,7 +230,7 @@ const authSlice = createSlice({
       })
       .addCase(loginWithGithub.fulfilled, (state, action) => {
         console.log(action.payload);
-        if (action.payload === "auth/popup-closed-by-user") {
+        if (action.payload === "auth/popup-closed-by-user" || action.payload === "auth/unauthorized-domain") {
           state.error = action.payload.errorMessage;
           state.status = "failed";
         } else {
