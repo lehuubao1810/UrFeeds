@@ -46,7 +46,13 @@ export const getSavePostFromFirestore = createAsyncThunk(
   "savePost/getSavePostFromFirestore",
   async (uid: string) => {
     const feedsDoc = await getDoc(doc(db, "savedPost", uid))
-      .then((doc) => doc.data())
+      .then((doc) => {
+        if (doc.exists()) {
+          return doc.data();
+        } else {
+          return { posts: [] };
+        }
+      })
       .catch((err) => err);
     return feedsDoc;
   }

@@ -18,7 +18,13 @@ export const getFeedsFromFirestore = createAsyncThunk(
   "feeds/getFeedsFromFirestore",
   async (uid: string) => {
     const feedsDoc = await getDoc(doc(db, "feeds", uid))
-      .then((doc) => doc.data())
+      .then((doc) => {
+        if (doc.exists()) {
+          return doc.data();
+        } else {
+          return { feeds: [] };
+        }
+      })
       .catch((err) => err);
     return feedsDoc;
   }
@@ -26,7 +32,7 @@ export const getFeedsFromFirestore = createAsyncThunk(
 
 export const addFeedsToFirestore = createAsyncThunk(
   "feeds/addFeedToFirestore",
-  async (payload: { data: {feeds: Feed[]}; uid: string }) => {
+  async (payload: { data: { feeds: Feed[] }; uid: string }) => {
     const feedDoc = await setDoc(doc(db, "feeds", payload.uid), payload.data)
       .then(() => payload.data)
       .catch((err) => err);
@@ -36,7 +42,7 @@ export const addFeedsToFirestore = createAsyncThunk(
 
 export const updateDocInFirestore = createAsyncThunk(
   "feeds/updateDocInFirestore",
-  async (payload: { data: {feeds: Feed[]}; uid: string }) => {
+  async (payload: { data: { feeds: Feed[] }; uid: string }) => {
     const feedDoc = await updateDoc(doc(db, "feeds", payload.uid), payload.data)
       .then(() => payload.data)
       .catch((err) => err);
