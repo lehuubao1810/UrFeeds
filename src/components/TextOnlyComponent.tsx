@@ -12,7 +12,7 @@ const TextOnlyComponent: React.FC<Props> = (props) => {
   const text = tempDiv.textContent || tempDiv.innerText || "";
 
   return (
-    <div className="text-gray-900 dark:text-gray-100 truncate">{text}</div>
+    <div className="text-gray-900  truncate">{text}</div>
   );
 };
 

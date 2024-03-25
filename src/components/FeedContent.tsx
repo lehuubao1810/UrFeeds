@@ -96,10 +96,10 @@ const FeedContent: React.FC<Props> = (props) => {
                     navigator.clipboard.writeText(isSelectedPostUrl);
                     notify("Link copied to clipboard", "success");
                   }}
-                  className="cursor-pointer sm:flex-col flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  className="cursor-pointer sm:flex-col flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100  group"
                 >
                   <svg
-                    className="flex-shrink-0 w-8 h-8 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    className="flex-shrink-0 w-8 h-8 text-gray-500 transition duration-75  group-hover:text-gray-900 "
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 576 512"
                     fill="currentColor"
@@ -117,10 +117,10 @@ const FeedContent: React.FC<Props> = (props) => {
                   onClick={() => {
                     shareToFacebook(isSelectedPostUrl);
                   }}
-                  className="cursor-pointer sm:flex-col flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  className="cursor-pointer sm:flex-col flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group"
                 >
                   <svg
-                    className="flex-shrink-0 w-8 h-8 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-white"
+                    className="flex-shrink-0 w-8 h-8 text-gray-500 transition duration-75  group-hover:text-blue-600 "
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 576 512"
                     fill="currentColor"
@@ -148,7 +148,7 @@ const FeedContent: React.FC<Props> = (props) => {
                   href={post.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-lg mb-4 inline-block font-medium text-gray-900 dark:text-gray-100 hover:text-blue-500 dark:hover:text-blue-400"
+                  className="text-lg mb-4 inline-block font-medium text-gray-900  hover:text-blue-500 "
                 >
                   {post.title}
                 </a>
@@ -171,7 +171,7 @@ const FeedContent: React.FC<Props> = (props) => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 512 512"
-                          className="w-5 h-5 text-blue-600 dark:text-gray-400 mx-auto "
+                          className="w-5 h-5 text-blue-600  mx-auto "
                           fill="currentColor"
                         >
                           <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM96 136c0-13.3 10.7-24 24-24c137 0 248 111 248 248c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-110.5-89.5-200-200-200c-13.3 0-24-10.7-24-24zm0 96c0-13.3 10.7-24 24-24c83.9 0 152 68.1 152 152c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-57.4-46.6-104-104-104c-13.3 0-24-10.7-24-24zm0 120a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z" />{" "}
