@@ -24,7 +24,7 @@
     <!-- <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a> -->
     <br />
     <br />
-    <a href="https://shop-bb.vercel.app/">View Demo</a>
+    <a href="https://urfeeds.vercel.app/">View Demo</a>
     <!-- ·
     <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
     ·
@@ -60,7 +60,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="https://raw.githubusercontent.com/lehuubao1810/portfolio/main/public/img/urfeeds.png" alt="ShopBB">
+<img src="https://raw.githubusercontent.com/lehuubao1810/portfolio/main/public/img/urfeeds.png" alt="UrFeeds">
 
 
 ### Built With
@@ -86,6 +86,10 @@ RSS URL to test: https://techcrunch.com/feed/
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
+
+<h6>
+You need to get firebaseConfig on Firebase first
+</h6>
 
 ### Installation
 
