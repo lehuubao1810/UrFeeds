@@ -77,7 +77,7 @@ export default function AddRss() {
 
 
   return (
-    <div className="w-4/5 ">
+    <div className="sm:w-4/5">
       {status === "loading" || feeds.status === "loading" && <LoadingScreen />}
       <div className="p-6 bg-gray-100 rounded-lg mb-6">
         <h1 className="font-bold mb-4">Enter feed's address</h1>

@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       translate: {
-        "feed": "-20rem",
+        "hide-feed": "-20rem",
+        "show-feed": "-5rem",
       },
     },
   },

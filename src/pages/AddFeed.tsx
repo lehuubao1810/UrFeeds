@@ -8,7 +8,7 @@ export default function AddFeedPage() {
       <h1 className="text-2xl font-bold text-gray-800  text-center mt-4 mb-16">
         Add feeds
       </h1>
-      <div className="flex justify-around mb-16">
+      <div className="flex justify-around mb-16 gap-4 sm:gap-0">
         <Link
           to={"/add/rss"}
           className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group border-2 cursor-pointer"

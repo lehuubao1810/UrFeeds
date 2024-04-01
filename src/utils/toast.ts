@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 
+
 export const notify = (message: string, type: "success" | "error" | "warning" | "info") => {
   toast[type](message, {
     position: "top-right",
@@ -11,5 +12,9 @@ export const notify = (message: string, type: "success" | "error" | "warning" | 
     progress: undefined,
     theme: "light",
     // transition: Boun
+    style: {
+      fontSize: '14px',
+      maxWidth: '90%',
+    }
   });
 };

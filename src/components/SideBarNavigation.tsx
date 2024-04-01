@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/auth.slice";
@@ -9,12 +9,17 @@ import { removeAllFeeds } from "../redux/feeds.slice";
 import { resetFeed } from "../redux/feed.slice";
 import { resetSavePost } from "../redux/savePost.slice";
 
+import { Overlay } from "./Overlay";
+
 type Props = {
   // Define your props here
 };
 
 const SideBarNavigation: React.FC<Props> = (props) => {
-  // Component logic goes here
+  const sideBarRef = useRef<HTMLDivElement>(null);
+  const [isShowOverlay, setIsShowOverlay] = useState(false);
+
+
   console.log(props);
   const dispatch: AppDispatch = useDispatch();
 
@@ -23,15 +28,35 @@ const SideBarNavigation: React.FC<Props> = (props) => {
     dispatch(removeAllFeeds());
     dispatch(resetFeed());
     dispatch(resetSavePost());
-        
+
     // Logout user
     dispatch(logoutUser());
   };
 
+  const handleSideBar = () => {
+    const element = sideBarRef.current;
+    if (element) {
+      if (element.classList.contains("-translate-x-full")) {
+        element.classList.remove("-translate-x-full");
+      } else {
+        element.classList.add("-translate-x-full");
+      }
+      setIsShowOverlay(!isShowOverlay);
+    }
+  };
+
   return (
     <div className="z-50">
+      {isShowOverlay && (
+        <Overlay
+          status={isShowOverlay}
+          setStatus={setIsShowOverlay}
+          action={handleSideBar}
+        />
+      )}
       <button
         type="button"
+        onClick={handleSideBar}
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
       >
         <span className="sr-only">Open sidebar</span>
@@ -52,7 +77,15 @@ const SideBarNavigation: React.FC<Props> = (props) => {
 
       <aside
         id="default-sidebar"
-        className="fixed top-0 left-0 z-40 sm:w-20 w-72 h-screen transition-transform sm:translate-x-0 border-r-2" // -translate-x-full
+        ref={sideBarRef}
+        onClick={() => {
+          const element = sideBarRef.current;
+          if (element) {
+            element.classList.add("-translate-x-full");
+            setIsShowOverlay(false);
+          }
+        }}
+        className="fixed top-0 left-0 z-40 sm:w-20 w-72 h-screen transition-transform sm:translate-x-0 border-r-2 -translate-x-full" // -translate-x-full
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50  flex flex-col justify-between">

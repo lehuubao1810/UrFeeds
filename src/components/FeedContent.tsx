@@ -182,7 +182,7 @@ const FeedContent: React.FC<Props> = (props) => {
                         {props.feed?.title}
                       </span>
                     </div>
-                    <span className="text-xs text-gray-600  font-semibold">
+                    <span className="text-xs text-gray-600 font-semibold hidden sm:inline-block">
                       {new Date(
                         new Date().getTime() - new Date(post.pubDate).getTime()
                       ).getHours()}{" "}
